@@ -28,7 +28,10 @@ class CLI
         goodbye
         exit 
       else 
-        newspapers.display_headlines(input.to_i)
+        num_input = input.to_i
+        puts "Here are the headlines from #{newspapers.sources[num_input - 1]}"
+        puts "----------------------------------------------------------------"
+        newspapers.display_headlines(num_input)
         puts "Type 'list' to select another newspaper or 'quit' to exit program."
       end 
     end 
