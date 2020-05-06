@@ -1,6 +1,7 @@
 
 class News_Stand::Newspaper
     attr_accessor :sources
+    #here is a comment 
 
     def initialize
         #attributes.each {|key, value| self.send(("#{key}="), value)}
@@ -8,6 +9,7 @@ class News_Stand::Newspaper
     end 
 
     def display_sources
+        #todo - get sources from api 
         i = 1
         sources.each do |source| 
             puts "#{i}. #{source}"
