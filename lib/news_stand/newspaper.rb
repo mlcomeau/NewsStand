@@ -1,9 +1,5 @@
-require 'net/http'
-require 'open-uri'
-require 'json'
-require 'news-api'
 
-class Newspaper
+class News_Stand::Newspaper
     attr_accessor :sources
 
     def initialize
@@ -27,15 +23,9 @@ class Newspaper
 
 
     def display_headlines(num)
-        source_name = sources[num - 1].downcase.sub(/[ ]/, "-")
-
-        first_part = "https://newsapi.org/v2/top-headlines?sources="
-        last_part = "&apiKey=f90e8b10cd934afb8ed3336745a67595"
-
-        get_headlines_url = first_part + source_name + last_part 
-        
-
-       articles = JSON.parse(get_articles(get_headlines_url))
+       headlines_url = get_headlines_url(num)
+              
+       articles = JSON.parse(get_articles(headlines_url))
        
        articles.collect do |key, value|
         if key == "articles"
@@ -48,7 +38,15 @@ class Newspaper
        end 
     end 
 
+    def get_headlines_url(num)
+        source_name = sources[num - 1].downcase.sub(/[ ]/, "-")
 
+        first_part = "https://newsapi.org/v2/top-headlines?sources="
+        last_part = "&apiKey=f90e8b10cd934afb8ed3336745a67595"
+
+        headlines_url = first_part + source_name + last_part 
+        headlines_url 
+    end 
 
 
 end 

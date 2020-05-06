@@ -1,10 +1,9 @@
-require '../lib/newspaper.rb'
 
-class CLI
+class News_Stand::CLI
   attr_accessor :newspapers
   def call 
     greeting
-    @newspapers = Newspaper.new
+    @newspapers = News_Stand::Newspaper.new
     newspapers.display_sources
     menu 
   end 
@@ -43,4 +42,5 @@ class CLI
   end 
     
 
-end 
+end
+

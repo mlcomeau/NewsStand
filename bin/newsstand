@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby 
 
-require '../lib/news_stand/CLI.rb'
+require_relative '../lib/news_stand'
 
-CLI.new.call 
+News_Stand::CLI.new.call 
