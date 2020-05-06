@@ -4,4 +4,39 @@ is welcomed, shown list of news sources,
 selects a news source by typing a number, 
 is shown a list of the top headlines from that news source 
 Then they can go back to the list of news sources and continue or they can exit the program. 
+    
+---what is this for?
+    require "news_stand/version"
 
+next steps: 
+how to make it so user can select an article to read?
+Flow - 
+    after article list is displayed, 
+    puts
+    To view an article in your browser, Please type a number. 
+    Type list to select another newspaper or quit to exit the program 
+        user types a number - the article is opened in a browser (method name idea: open_article, goes in Newspaper class??)
+        user types list - display sources 
+        user types exit - closes program 
+    puts
+    To open another article, please type a number.
+    Type list to select another newspaper or quit to exit program. 
+
+for Newspaper class...
+-array named current_titles, and as the titles are retrieved from articles they are also pushed into the current_titles array 
+-curent_titles would need to be cleared once the user chose to leave the list of articles to either return to newspaper list or quit program 
+def clear_titles 
+newspapers.current_titles.clear 
+end 
+current_titles could be an instance variable? declared in initialize?
+
+def open_article(num)
+input = num-1 
+chosen_article = current_titles[input]
+-iterate through the articles array to find where article["title"] == chosen_article 
+
+-----------------
+def make_headline_url 
+
+
+    
