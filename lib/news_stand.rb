@@ -5,7 +5,7 @@ require 'news-api'
 
 require_relative "./news_stand/version"
 
-require_relative "./news_stand/newspaper"
+require_relative "./news_stand/news"
 require_relative "./news_stand/CLI"
 
 

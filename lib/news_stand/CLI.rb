@@ -1,10 +1,10 @@
 
 class News_Stand::CLI
-  attr_accessor :newspapers
+  attr_accessor :news
   def call 
     greeting
-    @newspapers = News_Stand::Newspaper.new
-    newspapers.display_sources
+    @news = News_Stand::News.new
+    news.display_sources
     menu 
   end 
 
@@ -21,16 +21,16 @@ class News_Stand::CLI
       input = gets.strip
       case input 
       when "list"
-        newspapers.display_sources
+        news.display_sources
         puts "Which newspaper would you like to see next?"
       when "quit"
         goodbye
         exit 
       else 
         num_input = input.to_i
-        puts "Here are the headlines from #{newspapers.sources[num_input - 1]}:"
+        puts "Here are the headlines from #{news.sources[num_input - 1]}:"
         puts "----------------------------------------------------------------"
-        newspapers.display_headlines(num_input)
+        news.display_headlines(num_input)
         puts "----------------------------------------------------------------"
         puts "Type 'list' to select another newspaper or 'quit' to exit program."
       end 

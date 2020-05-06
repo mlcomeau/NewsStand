@@ -1,5 +1,5 @@
 
-class News_Stand::Newspaper
+class News_Stand::News
     attr_accessor :sources
     #here is a comment 
 
