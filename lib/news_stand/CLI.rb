@@ -16,21 +16,26 @@ class CLI
 
   
   def menu 
-    input = nil
-    until input == "exit"
-      puts "Please type a number to select a newspaper."
-      puts "Or, you can type 'exit' to close this program."
-      input = gets.strip.to_i
-      #todo: fix the hard code 
-      if input > 0 && input < 11 
-        newspapers.display_headlines(input)
-        puts "If you would like to see headlines from another newspaper please type 'list'."
-      elsif input == "list"
+    input = ""
+    puts "Please type a number to select a newspaper."
+    while input != "quit"
+      input = gets.strip
+      case input 
+      when "list"
         newspapers.display_sources
+        puts "Which newspaper would you like to see next?"
+      when "quit"
+        goodbye
+        exit 
       else 
-        puts "Please choose a number between 1-10."
-      end
-    end
+        newspapers.display_headlines(input.to_i)
+        puts "Type 'list' to select another newspaper or 'quit' to exit program."
+      end 
+    end 
+  end
+
+  def goodbye 
+    puts "Have a nice day!"
   end 
     
 

@@ -27,7 +27,7 @@ class Newspaper
 
 
     def display_headlines(num)
-        source_name = sources[num - 1]
+        source_name = sources[num - 1].downcase.sub(/[ ]/, "-")
 
         first_part = "https://newsapi.org/v2/top-headlines?sources="
         last_part = "&apiKey=f90e8b10cd934afb8ed3336745a67595"
@@ -45,13 +45,7 @@ class Newspaper
                 i += 1
             end 
         end 
-        #puts article 
-        #i = 1 
-        #title = article["title"]
-        #puts "#{i}. #{title}"
-        #i += 1 
        end 
-
     end 
 
 
