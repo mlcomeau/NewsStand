@@ -5,7 +5,8 @@ class News_Stand::Newspaper
 
     def initialize
         #attributes.each {|key, value| self.send(("#{key}="), value)}
-        @sources = ["ABC News", "BBC News", "CBS News", "CNN", "Fox News", "Google News", "MSNBC", "NBC News", "Newsweek", "USA Today"]
+        @sources = []
+        self.get_sources
     end 
 
     def display_sources
@@ -17,7 +18,7 @@ class News_Stand::Newspaper
         end     
     end
 
-    def get_articles(url)
+    def call_newsapi(url)
         uri = URI.parse(url)
         reponse = Net::HTTP.get_response(uri)
         reponse.body
@@ -27,7 +28,7 @@ class News_Stand::Newspaper
     def display_headlines(num)
        headlines_url = get_headlines_url(num)
               
-       articles = JSON.parse(get_articles(headlines_url))
+       articles = JSON.parse(call_newsapi(headlines_url))
        
        articles.collect do |key, value|
         if key == "articles"
@@ -49,6 +50,20 @@ class News_Stand::Newspaper
         headlines_url = first_part + source_name + last_part 
         headlines_url 
     end 
+
+    def get_sources
+        sources_url = "https://newsapi.org/v2/sources?language=en&apiKey=f90e8b10cd934afb8ed3336745a67595"
+               
+        sources_json = JSON.parse(call_newsapi(sources_url))
+        
+        sources_json.collect do |key, value|
+         if key == "sources"
+             value.collect do |source|
+                 sources << source["name"]
+             end 
+         end 
+        end 
+     end 
 
 
 end 
