@@ -4,7 +4,6 @@ class News_Stand::CLI
   def call 
     greeting
     @news = News_Stand::News.new
-    news.display_sources
     menu 
   end 
 

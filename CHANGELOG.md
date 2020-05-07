@@ -1,0 +1,1 @@
+5/6/20, 7:12 pm - refactored CLI.rb . Removed news.display_sources, instead called that method from the initialize method in the News class. 

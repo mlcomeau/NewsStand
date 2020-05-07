@@ -1,16 +1,14 @@
 
 class News_Stand::News
     attr_accessor :sources
-    #here is a comment 
 
     def initialize
-        #attributes.each {|key, value| self.send(("#{key}="), value)}
         @sources = []
         self.get_sources
+        self.display_sources
     end 
 
     def display_sources
-        #todo - get sources from api 
         i = 1
         sources.each do |source| 
             puts "#{i}. #{source}"
@@ -20,8 +18,8 @@ class News_Stand::News
 
     def call_newsapi(url)
         uri = URI.parse(url)
-        reponse = Net::HTTP.get_response(uri)
-        reponse.body
+        response = Net::HTTP.get_response(uri)
+        response.body
     end 
 
 
