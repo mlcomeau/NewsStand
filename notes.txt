@@ -37,5 +37,28 @@ def make_headline_url
 
       #attributes.each {|key, value| self.send(("#{key}="), value)}
 
+  def list_sources 
+    i = 1 
+    News_Stand::Article.all.each do |article|
+      puts "#{i}. #{article.source.name}"
+    end 
+  end 
+
+
+          News_Stand::Newspaper.all each do |newspaper|
+            news_id = newspaper.id
+            first_part = "https://newsapi.org/v2/top_headlines?"
+            last_part = "&apiKey=f90e8b10cd934afb8ed3336745a67595"
+            middle_part = "sources=#{news_id}"
+            new_address = first_part + middle_part + last_part 
+            response = HTTParty.get(new_address)
+
+            articles = response["articles"]
+            articles.each do |article_hash|
+                News_Stand::Article.new(article_hash)
+            end 
+        end 
+        
+
 
     

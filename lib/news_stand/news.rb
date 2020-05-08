@@ -1,9 +1,11 @@
 
 class News_Stand::News
-    attr_accessor :sources
+    attr_accessor :sources, :articles, :titles 
 
     def initialize
         @sources = []
+        @articles = nil 
+        @titles = []
         self.get_sources
         self.display_sources
     end 
@@ -33,6 +35,7 @@ class News_Stand::News
             i = 1
             value.collect do |article|
                 puts "#{i}. #{article["title"]}"
+                titles << article["title"]
                 i += 1
             end 
         end 
@@ -62,6 +65,21 @@ class News_Stand::News
          end 
         end 
      end 
+
+     def display_article(num)
+        title_match = titles[num - 1]
+
+        articles.collect do |key, value|
+            if key == "articles"
+                value.collect do |article|
+                    if article["title"] == title_match
+                        puts "#{article["content"]}"
+                    end 
+                end 
+            end 
+        end 
+     end 
+
 
 
 end 
