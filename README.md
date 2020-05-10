@@ -20,6 +20,8 @@ Or install it yourself as:
 
 ## Usage
 
+This program is desgined to run in a UNIX operating system and uses the 'xdg-open' command. To install this command in your UNIX operating system you can type: sudo apt install xdg-utils 
+
 
 ## Development
 

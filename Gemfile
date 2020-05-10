@@ -5,5 +5,6 @@ gemspec
 
 gem "rake", "~> 12.0"
 gem "httparty"
-gem "pry"
+gem "json"
+gem "news-api"
 

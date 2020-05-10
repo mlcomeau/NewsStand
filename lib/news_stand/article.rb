@@ -1,48 +1,70 @@
 class News_Stand::Article 
 
-    attr_accessor :title, :url, :name, :content 
+    attr_accessor :title, :url, :source 
 
     @@all = []
-    @@headlines = []
+    @@sources = []
     @@current_titles = []
  
 
     def initialize(article_hash)
         article_hash.each do |method, article_data|
           self.send("#{method}=", article_data) if self.respond_to?("#{method}=")
-      
         end
-        @name = article_hash["source"]["name"]
+        @source = article_hash["source"]["name"]
         @@all << self
     end 
 
     def self.all 
         @@all 
     end
+
+    def self.sources 
+        @@sources 
+    end 
+
+    def self.unique_sources
+        sources.uniq 
+    end 
+
+    def self.current_titles
+        @@current_titles
+    end 
+
     
-
-    def self.headlines
-        @@headlines
-    end 
-
-    def headlines 
-        @@headlines
-    end 
-
-    def self.display_headlines(choice_url)
-        i = 1
+    def self.gather_sources
+        i = 1 
         all.each do |article|
-            if article.name == choice_url 
-                puts "#{i}. #{article.title}"
-                i += 1 
-                @@headlines << article.title 
-            end 
+            sources  << article.source 
+        end
+    end 
+
+    def self.display_sources 
+        i = 1 
+        unique_sources.each do |source|
+            puts "#{i}. #{source}"
+            i += 1 
         end 
     end 
 
-    def self.open_article(num_input)
-        article_index = num_input - 1 
-        chosen_article = headlines[article_index]
+
+    def self.get_headlines(num)
+        source_chosen = unique_sources[num - 1]
+        i = 1 
+
+        all.each do |article|
+            if article.source == source_chosen 
+                puts "#{i}. #{article.title}"
+                current_titles << article.title 
+                i += 1 
+            end 
+        end 
+    
+    end 
+
+
+    def self.open_article(num)
+        chosen_article = current_titles[num - 1]
 
         all.each do |article|
             if article.title == chosen_article 
@@ -51,9 +73,8 @@ class News_Stand::Article
         end 
     end 
 
-    def self.clear
+    def self.leave_source
         current_titles.clear 
-        current_source = ""
     end 
 end 
 
