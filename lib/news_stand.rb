@@ -1,3 +1,5 @@
+require 'dotenv'
+Dotenv.load('../.env')
 require 'httparty'
 require 'json'
 require 'news-api'

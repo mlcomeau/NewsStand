@@ -3,7 +3,7 @@ class News_Stand::Article
     attr_accessor :title, :url, :source 
 
     @@all = []
-    @@sources = []
+  
     @@current_titles = []
  
 
@@ -20,7 +20,9 @@ class News_Stand::Article
     end
 
     def self.sources 
-        @@sources 
+        @@all.collect do |article|
+            article.source
+        end 
     end 
 
     def self.unique_sources
@@ -32,12 +34,12 @@ class News_Stand::Article
     end 
 
     
-    def self.gather_sources
-        i = 1 
-        all.each do |article|
-            sources  << article.source 
-        end
-    end 
+  #  def self.gather_sources
+   #     i = 1 
+    #    all.each do |article|
+     #       sources  << article.source 
+      #  end
+    #end 
 
     def self.display_sources 
         i = 1 

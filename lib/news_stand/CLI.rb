@@ -4,7 +4,7 @@ class News_Stand::CLI
   def call 
     greeting
     News_Stand::API.get_articles
-    News_Stand::Article.gather_sources
+    #News_Stand::Article.gather_sources
     first_menu 
   end 
 
