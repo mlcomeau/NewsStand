@@ -20,19 +20,9 @@ class News_Stand::Article
         @@all.collect { |article| article.source }.uniq 
     end 
 
-    def self.display_sources 
-        i = 1 
-        sources.each do |source|
-            puts "#{i}. #{source}"
-            i += 1 
-        end 
-    end 
-    
-    def self.get_headlines(num)
-        source_chosen = sources[num - 1]
-
+    def self.get_headlines(chosen_source)
         all.collect do |article|
-            if article.source == source_chosen 
+            if article.source == chosen_source 
                 article.title 
             end 
         end.compact  

@@ -4,7 +4,7 @@ class News_Stand::CLI
   def call 
     greeting
     News_Stand::API.get_articles
-    first_menu 
+    display_sources 
   end 
 
   def greeting 
@@ -15,10 +15,15 @@ class News_Stand::CLI
   end 
     
 
-  def first_menu
+  def display_sources
     puts "Here is a list of our available news sources!"
     puts "---------------------------------------------"
-    News_Stand::Article.display_sources
+    i = 1 
+    current_sources = News_Stand::Article.sources
+    current_sources.each do |source|
+      puts "#{i}. #{source}"
+      i += 1 
+    end 
     puts "---------------------------------------------"
     puts "Please type a number to select a news source."
     
@@ -26,14 +31,15 @@ class News_Stand::CLI
     if input == "quit"
       goodbye 
     else 
-      second_menu(input.to_i)
+      chosen_source = current_sources[input.to_i - 1]
+      display_headlines_by_source(chosen_source)
     end 
   end
 
-  def second_menu(input)
-    puts "Here are the top headlines from #{News_Stand::Article.sources[input - 1]}"
+  def display_headlines_by_source(chosen_source)
+    puts "Here are the top headlines from #{chosen_source}"
     puts "---------------------------------------------"
-    current_headlines = News_Stand::Article.get_headlines(input)
+    current_headlines = News_Stand::Article.get_headlines(chosen_source)
     i = 1 
     current_headlines.each do |headline|
       puts "#{i}. #{headline}"
@@ -48,7 +54,7 @@ class News_Stand::CLI
       if input == "quit"
         goodbye
       elsif input == "back"  
-        first_menu 
+        display_sources
         break 
       else 
         chosen_headline = current_headlines[input.to_i - 1]
