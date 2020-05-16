@@ -2,10 +2,7 @@ class News_Stand::Article
 
     attr_accessor :title, :url, :source 
 
-    @@all = []
-  
-    @@current_titles = []
- 
+    @@all = [] 
 
     def initialize(article_hash)
         article_hash.each do |method, article_data|
@@ -20,64 +17,35 @@ class News_Stand::Article
     end
 
     def self.sources 
-        @@all.collect do |article|
-            article.source
-        end 
+        @@all.collect { |article| article.source }.uniq 
     end 
-
-    def self.unique_sources
-        sources.uniq 
-    end 
-
-    def self.current_titles
-        @@current_titles
-    end 
-
-    
-  #  def self.gather_sources
-   #     i = 1 
-    #    all.each do |article|
-     #       sources  << article.source 
-      #  end
-    #end 
 
     def self.display_sources 
         i = 1 
-        unique_sources.each do |source|
+        sources.each do |source|
             puts "#{i}. #{source}"
             i += 1 
         end 
     end 
-
-
-    def self.get_headlines(num)
-        source_chosen = unique_sources[num - 1]
-        i = 1 
-
-        all.each do |article|
-            if article.source == source_chosen 
-                puts "#{i}. #{article.title}"
-                current_titles << article.title 
-                i += 1 
-            end 
-        end 
     
+    def self.get_headlines(num)
+        source_chosen = sources[num - 1]
+
+        all.collect do |article|
+            if article.source == source_chosen 
+                article.title 
+            end 
+        end.compact  
     end 
 
-
-    def self.open_article(num)
-        chosen_article = current_titles[num - 1]
-
+    def self.open_article(chosen_headline)
         all.each do |article|
-            if article.title == chosen_article 
+            if article.title == chosen_headline 
                 system("xdg-open #{article.url}")            
             end 
         end 
     end 
 
-    def self.leave_source
-        current_titles.clear 
-    end 
 end 
 
 
